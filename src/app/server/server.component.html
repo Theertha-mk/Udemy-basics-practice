@@ -36,8 +36,7 @@
 <Button
   class="btn btn-primary"
   [disabled]="username === ''"
-  (click)="username = ''"
->
+  (click)="username = ''">
   Reset User
 </Button>
 <br />
@@ -54,14 +53,28 @@
 <button
   class="btn btn-primary"
   [disabled]="!allowNewServer"
-  (click)="onCreateServer()"
->
+  (click)="onCreateServer()">
   Add Server
 </button>
 <p *ngIf="serverCreated; else noServer">
-  Server was created, servername is {{ serverName }}
+  Server was created, servername is {{ serverName }} {{ serverStatus }}
 </p>
 <ng-template #noServer>
   <p>No server was created</p>
 </ng-template>
+
+<!-- **************************** Directives-*ngStyle **************************************-->
+
+<p [ngStyle]="{ backgroundColor: getColor() }">
+  {{ 'server' }} with ID {{ serverId }} is {{ getServerStatus() }}
+</p>
+
+<!-- **************************** Directives-*ngClass **************************************-->
+
+<p
+  [ngStyle]="{ backgroundColor: getColor() }"
+  [ngClass]="{ online: serverStatus === 'online' }">
+  {{ 'server' }} with ID {{ serverId }} is {{ getServerStatus() }}
+</p>
+
 
