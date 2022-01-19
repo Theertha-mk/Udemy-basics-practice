@@ -36,7 +36,8 @@
 <Button
   class="btn btn-primary"
   [disabled]="username === ''"
-  (click)="username = ''">
+  (click)="username = ''"
+>
   Reset User
 </Button>
 <br />
@@ -53,7 +54,8 @@
 <button
   class="btn btn-primary"
   [disabled]="!allowNewServer"
-  (click)="onCreateServer()">
+  (click)="onCreateServer()"
+>
   Add Server
 </button>
 <p *ngIf="serverCreated; else noServer">
@@ -73,8 +75,32 @@
 
 <p
   [ngStyle]="{ backgroundColor: getColor() }"
-  [ngClass]="{ online: serverStatus === 'online' }">
+  [ngClass]="{ online: serverStatus === 'online' }"
+>
   {{ 'server' }} with ID {{ serverId }} is {{ getServerStatus() }}
 </p>
 
+<!-- **************************** Directives-*ngFor **************************************-->
 
+<p
+  *ngFor="let server of servers"
+  [ngStyle]="{ backgroundColor: getColor() }"
+  [ngClass]="{ online: serverStatus === 'online' }"
+>
+  {{ 'server' }} with ID {{ serverId }} is {{ getServerStatus() }}
+</p>
+
+<!-- **************************** Assignment-Directives **************************************-->
+
+<h3>Assignment-directives</h3>
+<button class="btn btn-primary" (click)="onToggleDetails()">
+  Display Details
+</button>
+<p *ngIf="showSecret">Secret password=tuna</p>
+<div
+  *ngFor="let logItem of log; let i = index"
+  [ngStyle]="{ backgroundColor: i >= 4 ? 'blue' : 'transparent' }"
+  [ngClass]="{ 'white-text': i >= 4 }"
+>
+  {{ logItem }}
+</div>
